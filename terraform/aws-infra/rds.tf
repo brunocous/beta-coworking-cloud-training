@@ -15,10 +15,26 @@ resource "aws_db_instance" "airflowdb" {
 }
 
 resource "aws_db_security_group" "rds-security-group" {
-  name = "rds-security-group"
+  name = "${var.student-id}-rds-security-group"
   description = "Frontend Access"
 
   ingress {
-    security_group_id = aws_security_group.AirflowEC2SG.id
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
