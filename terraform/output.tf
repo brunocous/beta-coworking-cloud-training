@@ -1,3 +1,4 @@
-output "aws_region" {
-  value = local.aws_region
+output "url_web_ui_airflow" {
+  value = module.aws-infra.Airflow-web-ui-url
 }
+

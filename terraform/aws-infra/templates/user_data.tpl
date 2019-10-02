@@ -5,7 +5,7 @@ exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
 echo "Installing aws-cfn"
 yum install -y aws-cfn-bootstrap
 # Start cfn-init
-/opt/aws/bin/cfn-init -v -c install --stack ${AWS::StackId} --resource EC2Instance --region ${region}
+/opt/aws/bin/cfn-init -v -c install --stack ${fake_stack_id} --resource EC2Instance --region ${aws_region}
 # Download and unzip the Movielens dataset
 wget http://files.grouplens.org/datasets/movielens/ml-latest.zip && unzip ml-latest.zip
 # Upload the movielens dataset files to the S3 bucket
