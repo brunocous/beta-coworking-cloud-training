@@ -1,3 +1,3 @@
-output "VPC_ID" {
-  value = module.aws-infra.
+output "aws_region" {
+  value = local.aws_region
 }

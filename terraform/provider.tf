@@ -4,6 +4,7 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-1"
-  profile = "TBA"
+  profile = "beta-cowork"
   version = ">= 2.6.0"
 }
+
