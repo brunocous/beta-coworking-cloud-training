@@ -21,3 +21,7 @@ variable "git-repo" {
 variable "student-id" {
   description = "Unique ID of student"
 }
+
+variable "ec2-key-pair-name" {
+  description = "Name of the EC2 key pair"
+}

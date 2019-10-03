@@ -1,7 +1,5 @@
 resource "random_string" "db-password" {
   length = 16
-  special = true
-  override_special = "/@"
 }
 
 resource "aws_db_instance" "airflowdb" {

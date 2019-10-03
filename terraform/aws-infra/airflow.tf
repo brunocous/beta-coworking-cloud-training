@@ -1,10 +1,11 @@
 resource "aws_instance" "airflow-instance" {
   ami           = var.airflow-ami-id
-  instance_type = "t2.micro"
+  instance_type = "m5.large"
   iam_instance_profile = aws_iam_instance_profile.airflow-instance-profile.name
+  key_name = var.ec2-key-pair-name
 
   tags = {
-    Name = "Airflow"
+    Name = "${var.student-id}-Airflow"
   }
 
   user_data = data.template_file.start-script-airflow.rendered
@@ -35,21 +36,22 @@ resource "aws_security_group" "AirflowEC2SG" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 data template_file "start-script-airflow" {
-  template = file("${path.module}/templates/user_data.tpl")
+  template = file("${path.module}/templates/ec2-startup.tpl")
   vars = {
     aws_region = var.region
     datalake_bucket = var.datalake-bucket
     db_password = random_string.db-password.result
     db_endpoint = aws_db_instance.airflowdb.endpoint
-    fake_stack_id = random_string.stack-id.result
   }
 }
 
-resource "random_string" "stack-id" {
-  length = 16
-  special = false
-}
 

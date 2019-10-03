@@ -6,6 +6,8 @@ module "aws-infra" {
 
   student-id = "brunoc"
   git-repo = "https://github.com/brunocous/beta-coworking-cloud-training.git"
-  airflow-ami-id = "ami-d834aba1"
+  airflow-ami-id = "ami-06358f49b5839867c"
   datalake-bucket = "betacowork-data"
+
+  ec2-key-pair-name = "teacher1"
 }
